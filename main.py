@@ -12,7 +12,7 @@ def send_data():
 
     try:
         # Kiểm tra địa chỉ multicast group và port
-        socket.inet_aton(group)
+        socket.inet_pton(socket.AF_INET, group)
         port = int(port)
     except (socket.error, ValueError):
         messagebox.showerror("Lỗi", "Địa chỉ multicast group hoặc port không hợp lệ!")
@@ -49,7 +49,7 @@ def start_receiver():
 
     try:
         # Kiểm tra địa chỉ multicast group và port
-        socket.inet_aton(group)
+        socket.inet_pton(socket.AF_INET, group)
         port = int(port)
     except (socket.error, ValueError):
         messagebox.showerror("Lỗi", "Địa chỉ multicast group hoặc port không hợp lệ!")
@@ -137,6 +137,7 @@ message_label = tk.Label(root, text="Dữ liệu nhận được:")
 message_label.pack()
 message_text = tk.Text(root)
 message_text.pack()
+message_text.config(state=tk.DISABLED)
 
 
 stop_button = tk.Button(root, text="Ngừng nhận", command=stop_receive)
